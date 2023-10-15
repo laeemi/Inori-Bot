@@ -1,9 +1,9 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from bot.config import settings
-from bot.handlers import menu, anime, music, start, upload, image
-from bot.middlewares import LogMiddleware
+from config import settings
+from handlers import menu, anime, music, start, upload, image
+from middlewares import LogMiddleware
 
 logging.basicConfig(handlers=(logging.FileHandler('../log.txt'), logging.StreamHandler()), level=logging.INFO)
 

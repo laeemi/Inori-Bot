@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  bot:
+    build: bot
+    container_name: bot
+    env_file:
+      - .env
+    volumes:
+      - C:\Users\anton\PycharmProjects\Inori-Bot\bot:/app/bot
+    command: "python3 bot/inori_bot.py"
+    networks:
+      - frontend
+    depends_on:
+      - api
+  api:
+    build: backend
+    container_name: api
+    env_file:
+      - .env
+    volumes:
+      - C:\Users\anton\PycharmProjects\Inori-Bot\backend:/app/backend
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "8001:8001"
+    command: "uvicorn backend.app:app --port 8002"
+    depends_on:
+      - pgdb
+
+  pgdb:
+    image: postgres
+    container_name: pgdb
+    environment:
+      POSTGRES_DB: "InoriDatabase"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "9710549312"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    networks:
+      - backend
+    ports:
+      - "5432:5432"
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

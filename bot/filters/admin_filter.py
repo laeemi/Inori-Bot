@@ -1,7 +1,7 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import Update
 
-from bot.config import settings
+from config import settings
 
 
 class AdminFilter(BaseFilter):

@@ -1,10 +1,10 @@
 from aiogram import Router, F
 from aiohttp import ClientSession
 from aiogram.types import CallbackQuery
-from bot.callbacks.music_callb import MusicCallback
-from bot.callbacks.menu_callb import MenuCallback
-from bot.config import settings
-from bot.keyboards.music import get_music_kb
+from callbacks.music_callb import MusicCallback
+from callbacks.menu_callb import MenuCallback
+from config import settings
+from keyboards.music import get_music_kb
 
 
 router = Router()
@@ -15,9 +15,10 @@ base_url = settings.base_url
 async def music(callback: CallbackQuery):
     async with ClientSession(base_url) as session:
         async with session.get("/music") as resp:
+            titles = (await resp.json())
             await callback.message.answer(
                 text="Вот некоторая моя музыка:",
-                reply_markup=get_music_kb((await resp.json())))
+                reply_markup=get_music_kb(titles))
     await callback.answer()
 
 
@@ -26,6 +27,6 @@ async def send_music(callback: CallbackQuery, callback_data: MusicCallback):
     async with ClientSession(base_url) as session:
         params = {"title": callback_data.id}
         async with session.get("/send_m", params=params) as resp:
-            music_id = await resp.text()
-            await callback.message.answer_audio(music_id.strip("\""))
+            file_id = (await resp.json())
+            await callback.message.answer_audio(file_id.get("file_id"))
     await callback.answer()

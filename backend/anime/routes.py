@@ -2,19 +2,20 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.anime.models import Anime
+from backend.anime.schemas import AnimeSize, AnimeTitle
 from backend.core.postgres import get_session
 
 router = APIRouter()
 
 
-@router.get("/anime")
+@router.get("/anime", response_model=AnimeSize)
 async def get_anime(
         session: AsyncSession = Depends(get_session)
 ):
-    return await Anime.get_size_of_list(session)
+    return {"size": await Anime.get_size_of_list(session)}
 
 
-@router.get("/send_a")
+@router.get("/send_a", response_model=AnimeTitle)
 async def send_anime(
         episode: int, session: AsyncSession = Depends(get_session)
 ):

@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from bot.callbacks.anime_callb import AnimeCallback
+from callbacks.anime_callb import AnimeCallback
 
 
 def get_anime_kb(series: int) -> InlineKeyboardMarkup:

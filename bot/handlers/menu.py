@@ -1,9 +1,8 @@
-from bot.config import settings
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
-from bot.callbacks.menu_callb import MenuCallback
-from bot.keyboards.menu import get_menu_kb
+from callbacks.menu_callb import MenuCallback
+from keyboards.menu import get_menu_kb
 
 
 router = Router()

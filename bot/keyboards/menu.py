@@ -1,5 +1,5 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from bot.callbacks.menu_callb import MenuCallback
+from callbacks.menu_callb import MenuCallback
 
 
 def get_menu_kb() -> InlineKeyboardMarkup:

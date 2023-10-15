@@ -3,12 +3,12 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
-import io
+
 
 from aiohttp import ClientSession
 
-from bot.config import settings
-from bot.filters.admin_filter import AdminFilter
+from config import settings
+from filters.admin_filter import AdminFilter
 
 router = Router()
 base_url = settings.base_url
