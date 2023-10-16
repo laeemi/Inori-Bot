@@ -11,7 +11,7 @@ class BackendSettings(BaseSettings):
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
     POSTGRES_PORT: str
-    POSTGRES_DATABASE: str
+    POSTGRES_DB: str
 
     DATABASE_URL: Optional[PostgresDsn] = None
 
@@ -27,7 +27,7 @@ class BackendSettings(BaseSettings):
             password=self["POSTGRES_PASSWORD"],
             host=self["POSTGRES_HOST"],
             port=int(self["POSTGRES_PORT"]),
-            path=f'{self["POSTGRES_DATABASE"]}',
+            path=f'{self["POSTGRES_DB"]}',
         )
         return self
 

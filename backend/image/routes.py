@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
-from fastapi.encoders import jsonable_encoder
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.image.models import Image
-from backend.core.postgres import get_session
-from backend.image.schemas import ImageId
+from image.models import Image
+from core.postgres import get_session
+from image.schemas import ImageId
 
 router = APIRouter()
 

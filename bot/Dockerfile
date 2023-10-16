@@ -1,6 +1,7 @@
 FROM python:3.11
 LABEL authors="laemi"
 
-COPY . /app/bot
-WORKDIR /app
-RUN pip install -r /app/bot/req.txt
+WORKDIR /app/bot
+COPY req.txt req.txt
+RUN pip install -r req.txt
+COPY . .

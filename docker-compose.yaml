@@ -2,48 +2,46 @@ version: '3'
 
 services:
   bot:
-    build: bot
-    container_name: bot
+    build:
+      context: bot
+      dockerfile: Dockerfile
     env_file:
-      - .env
-    volumes:
-      - C:\Users\anton\PycharmProjects\Inori-Bot\bot:/app/bot
-    command: "python3 bot/inori_bot.py"
+      - bot/.env
+    command: "python3 inori_bot.py"
     networks:
       - frontend
     depends_on:
       - api
-  api:
-    build: backend
-    container_name: api
+  api: # http://api:8001
+    build:
+      context: backend
+      dockerfile: Dockerfile
     env_file:
-      - .env
-    volumes:
-      - C:\Users\anton\PycharmProjects\Inori-Bot\backend:/app/backend
+      - backend/.env
+    environment:
+      - POSTGRES_HOST=pgdb
+    expose:
+      - "8001"
     networks:
       - backend
       - frontend
-    ports:
-      - "8001:8001"
-    command: "uvicorn backend.app:app --port 8002"
+    command: "uvicorn app:app --port 8001 --host 0.0.0.0"
     depends_on:
       - pgdb
 
   pgdb:
     image: postgres
-    container_name: pgdb
+    env_file:
+      - backend/.env
     environment:
-      POSTGRES_DB: "InoriDatabase"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "9710549312"
-      PGDATA: "/var/lib/postgresql/data/pgdata"
-    networks:
-      - backend
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
       - "5432:5432"
+    networks:
+      - backend
 
 networks:
   frontend:
-    driver: bridge
   backend:
-    driver: bridge

@@ -1,10 +1,8 @@
-from typing import Tuple, Any
-
 from sqlalchemy import Column, String, select, Integer, insert, Row
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped
 
-from backend.core.postgres.base import BaseModel
+from core.postgres.base import BaseModel
 
 
 class Anime(BaseModel):

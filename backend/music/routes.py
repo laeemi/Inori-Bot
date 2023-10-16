@@ -1,18 +1,18 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.core.postgres import get_session
-from backend.music.models import Music
-from backend.music.schemas import MusicTitles, MusicFull
+from core.postgres import get_session
+from music.models import Music
+from music.schemas import MusicFull
 
 router = APIRouter()
 
 
-@router.get("/music", response_model=MusicTitles)
+@router.get("/music", response_model=list[str])
 async def get_music(
         session: AsyncSession = Depends(get_session)
 ):
-    return {'titles': await Music.get_all(session)}
+    return await Music.get_all(session)
 
 
 @router.get("/send_m", response_model=MusicFull)

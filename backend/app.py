@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from .config import settings
-from .music.routes import router as music_router
-from .anime.routes import router as anime_router
-from .image.routes import router as image_router
+from config import settings
+from music.routes import router as music_router
+from anime.routes import router as anime_router
+from image.routes import router as image_router
 
 
 app = FastAPI(

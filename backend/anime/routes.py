@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.anime.models import Anime
-from backend.anime.schemas import AnimeSize, AnimeTitle
-from backend.core.postgres import get_session
+from anime.models import Anime
+from anime.schemas import AnimeSize, AnimeTitle
+from core.postgres import get_session
 
 router = APIRouter()
 
