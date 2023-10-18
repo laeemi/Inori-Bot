@@ -9,7 +9,7 @@ from core.postgres.base import BaseModel
 
 
 class Image(BaseModel):
-    __tablename__ = "images_list"
+    __tablename__ = "image"
 
     file_id: Mapped[str] = Column(String, primary_key=True, nullable=False)
 

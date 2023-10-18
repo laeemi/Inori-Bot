@@ -6,7 +6,7 @@ from core.postgres.base import BaseModel
 
 
 class Anime(BaseModel):
-    __tablename__ = "anime_list"
+    __tablename__ = "anime"
 
     episode: Mapped[int] = Column(Integer, primary_key=True, nullable=False)
     file_id: Mapped[str] = Column(String, nullable=False)

@@ -8,7 +8,7 @@ from core.postgres.base import BaseModel
 
 
 class Music(BaseModel):
-    __tablename__ = "music_list"
+    __tablename__ = "music"
 
     file_id: Mapped[str] = Column(String, primary_key=True, nullable=False)
     title: Mapped[str] = Column(String, nullable=False)
